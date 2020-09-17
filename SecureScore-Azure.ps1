@@ -1,24 +1,23 @@
 ﻿#@Author: Rachid Moyse Polania
-#@Company: TIVIT
-#Ensure it's runnig like administrator the next two lines
+#Ensure it's runnig like administrator the next two line
+######INSTALL THE AZURERM MODULE AND RUN THE EXECUTION POLICY COMMAND######
 #Install-Module azurerm
 #Set-ExecutionPolicy Unrestricted
+###########################################################################
 
+#Replace the "subscription1Name" for the name of subscription 
+#Replace the "subscription1ID" for the ID of the subscription
+#Apply the same work for others subscriptions
 $Subscriptions = @{
-    "ECP-DevTest" = "c818ac3b-d6f3-4229-a359-0d5ac47a4317"
-    "ECP-Production" = "d9e2f9de-9c3c-4a3a-93d9-1d2d5bf16fa2"
-    "ECP-Shared" = "66612ed2-9774-4b1c-a226-693672d0362d"
-    "Operaciones ECP" = "b2730210-6c74-49b6-9692-4da321ab7db8"
-    "Portal ECOPETROL - Extranet" = "9ce752d7-bb06-412b-9ebe-514a6116e0f5"
-    "Proyectos QA" = "e1a9820c-5b75-4678-9cef-c03928f58370"
-    "Servicios Transversales" = "68f1b01a-d70c-49b0-9d23-03414febbba0"
-    "Upstream G y G" = "edada5cf-38d9-4029-a2e8-04c6e55769d7"
+    "subscription1Name" = "subscription1ID"
+    "subscription2Name" = "subscription2ID"
+    "subscription3Name" = "subscription3ID"
 }
 
 $output = @()
 ###########################Using prompt authentication#####################
-$username = "_SecCenOp@ecopetrol.onmicrosoft.com"
-$password = ConvertTo-SecureString "hackmeplease123@." -AsPlainText -Force
+$username = "username" #Replace This
+$password = ConvertTo-SecureString "password" -AsPlainText -Force #Replace This
 $credenciales = New-Object System.Management.Automation.PSCredential($username, $password)
 Connect-AzureRmAccount -Credential $credenciales
 ###########################################################################
@@ -72,6 +71,6 @@ foreach($subcription in $Subscriptions.GetEnumerator()){
 
 }
 
-$output | Export-Csv -Path '.\test-SecureScoresECP.csv' -NoTypeInformation -Append
+$output | Export-Csv -Path '.\SecureScores.csv' -NoTypeInformation -Append
 
 
